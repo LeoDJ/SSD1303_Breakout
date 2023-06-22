@@ -13,6 +13,4 @@ TPS61040DBV,U1,SOT-23-5,C7722
 2N7002,"Q1,Q2",SOT-23,C8545
 10uH/<250mΩ,L1,IND-SMD_L5.0-W5.0,C963773
 10u,"C1,C2,C3,C6",C_0603_1608Metric,C96446
-I²C/~{SPI},JP2,SolderJumper-2_P1.3mm_Open_TrianglePad1.0x1.5mm,
-PAR/~{SER},JP1,SolderJumper-2_P1.3mm_Open_TrianglePad1.0x1.5mm,
 PinHeader,J1,PinHeader_1x07_P2.54mm_Vertical,
