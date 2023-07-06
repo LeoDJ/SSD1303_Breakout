@@ -23,8 +23,20 @@ You can [preview the PCB](https://kicanvas.org/?github=https%3A%2F%2Fgithub.com%
 [^1]: Might draw up to ~250 mA @ 3.3V with all pixels on, guesstimated.  
 I've measured roughly 50mA @ 12V with the highest brightness and all pixels on, so with pessimistic conversion losses around 750mW.
 
+## Rev 1.0
+### Issues
+- In SPI mode, the "serial data out" pin of the SSD1303 (pin D2) doesn't always stay high[^2], as was initially measured. Thus the simple diode trick to allow both SPI and I²C mode, without needing to "keep D2 disconnected in SPI mode" as stated in the datasheet, won't work.
+  - **Workaround**: Remove D1 (below the FPC) for working SPI mode
+  - Fix in next revision: An additional FET in series to the D2 signal that gets activated by the solder jumper
+- An additional solder jumper for I²C address would probably be nice
+  - In case one wants to use the breakout board on a 4-pin-only socket
+  - **Workaround**: solder a jumper wire from the DC pin/pad to the VCC pin/pad to select address `0x3D`
 
-### Screenshots of revision 1.0 3D view
+[^2]: It appears to shift out some kind of data, maybe from an internal register. The SSD1303 datasheet doesn't give any hint to the behaviour of pin D2 in SPI mode, except to keep it disconnected.  
+Over time the value that gets shifted out accumulates 1 bits. Starting at some random value with few bits set on power-up. (It probably turns into a constant high signal as soon as it reaches 0xFF, but I could only actually observe it up to 0x7F/0xF7 in my last measurement.)  
+When the pin is actively pulled low by the SSD1303, it interferes through the diode D1 with the actual data meant for the data input pin D1.  
+
+### Screenshots of 3D view
 Somehow I got a bit carried away for a relatively simple design, but otoh I've learned a lot again.
 
 <p float="left" style="display: flex; flex-wrap: wrap; align-items: center;">
